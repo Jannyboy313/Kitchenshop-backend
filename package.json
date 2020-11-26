@@ -1,0 +1,29 @@
+{
+  "name": "kitchenshop-backend",
+  "version": "1.0.0",
+  "description": "A REST API for IPRWC",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jannyboy313/Kitchenshop-backend.git"
+  },
+  "author": "Jan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jannyboy313/Kitchenshop-backend/issues"
+  },
+  "homepage": "https://github.com/Jannyboy313/Kitchenshop-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.4.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "swagger-ui-express": "^4.1.4"
+  }
+}
