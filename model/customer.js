@@ -1,6 +1,6 @@
 import sequelize, { Sequelize } from '../db/connection.js';
 
-const User = sequelize.define('user', {
+const Customer = sequelize.define('customer', {
     customer_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -32,4 +32,4 @@ const User = sequelize.define('user', {
     }
 });
 
-module.exports = (User);
+module.exports = (Customer);
