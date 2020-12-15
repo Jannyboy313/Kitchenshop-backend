@@ -20,7 +20,6 @@ exports.postLogin = async (req, res) => {
     const isValidPass = await bcrypt.compare(password, reply[0].password)
     if (isValidPass) {
         const token = generateAccessToken(reply[0]);
-        const refreshToken = generateRefreshToken(reply[0]);
         // res.cookie('XRSF-TOKEN', req.csrfToken());
         res.status(200).send({"token": token, "permission": reply.permission});
     } else {
@@ -29,10 +28,7 @@ exports.postLogin = async (req, res) => {
     res.end()
 }
 
-generateAccessToken = (user) => {
-    jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "20s" });
-}
 
-generateRefreshToken = (user) => {
-    jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+generateAccessToken = (user) => {
+    jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1800s" });
 }
