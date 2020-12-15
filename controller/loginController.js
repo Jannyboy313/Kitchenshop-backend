@@ -36,20 +36,22 @@ exports.postRegister = async(req, res) => {
     let body = req.body;
     const hashedPassword = await bcrypt.hash(body.user.password, 12);
     let reply
-    if (!validateUser.validateUser(body.user) && !validateAddress.validateAddres(body.address)) {
-        res.status(406).send("Incorrect data send");
+
+    if (isDataValid(body)) {
+        res.status(406);
         res.end();
+        return;
     }
-    body = format.formatRegisterData(body);
+
     try {
-        address = await addressLookup(body.address)[0].address_id;
+        address_id = await getAddress_id(body.address);
         reply = await Users.create({
             firstname: body.user.firstname,
             middlename: body.user.middlename,
             lastname: body.user.lastname,
             email: body.user.email,
             password: hashedPassword,
-            address_id: address
+            address_id: address_id
         })
     } catch(err) {
         console.log(err);
@@ -58,7 +60,14 @@ exports.postRegister = async(req, res) => {
     res.status(201).send(reply)
 }
 
-exports.addressLookup = async(address) => {
+isDataValid = (body) => {
+    if (!validateUser.validateUser(body.user) || !validateAddress.validateAddress(body.address)) {
+        return false;
+    }
+    return true;
+}
+
+getAddress_id = async(address) => {
     let reply;
     try {
         reply = await Address.findOrCreate({
@@ -72,7 +81,7 @@ exports.addressLookup = async(address) => {
         console.log(err);
         return null;
     }
-    return reply;
+    return reply[0].address_id;
 }
 
 generateAccessToken = (user) => {

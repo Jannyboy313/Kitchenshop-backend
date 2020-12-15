@@ -15,6 +15,6 @@ formatNameData = (body) => {
 formatAddressData = (body) => {
     body.address.city = body.address.city.toLowerCase().charAt(0).toUpperCase().trim();
     body.address.street_address = body.address.street_address.toLowerCase().charAt(0).toUpperCase().trim();
-    body.address.zipcode = body.address.email.toUpperCase().split(" ").join("").trim();
+    body.address.zipcode = body.address.zipcode.toUpperCase().split(" ").join("").trim();
     return body;
 }
