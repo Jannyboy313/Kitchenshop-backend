@@ -34,30 +34,22 @@ exports.postLogin = async (req, res) => {
 
 exports.postRegister = async(req, res) => {
     let body = req.body;
-    const hashedPassword = await bcrypt.hash(body.user.password, 12);
-    let reply
+    body.user.password = await bcrypt.hash(body.user.password, 12);
+    let createdUser;
 
     if (isDataValid(body)) {
-        res.status(406);
+        res.status(406).send(body);
         res.end();
         return;
     }
-
     try {
         address_id = await getAddress_id(body.address);
-        reply = await Users.create({
-            firstname: body.user.firstname,
-            middlename: body.user.middlename,
-            lastname: body.user.lastname,
-            email: body.user.email,
-            password: hashedPassword,
-            address_id: address_id
-        })
+        createdUser = await createUser(body, address_id)
     } catch(err) {
         console.log(err);
         res.send(err);
     }
-    res.status(201).send(reply)
+    res.status(201).send(createdUser)
 }
 
 isDataValid = (body) => {
@@ -82,6 +74,24 @@ getAddress_id = async(address) => {
         return null;
     }
     return reply[0].address_id;
+}
+
+createUser = async(body, address_id) => {
+    let reply;
+    try {
+        reply = await Users.create({
+            firstname: body.user.firstname,
+            middlename: body.user.middlename,
+            lastname: body.user.lastname,
+            email: body.user.email,
+            password: hashedPassword,
+            address_id: address_id
+        })
+    } catch(err) {
+        console.log(err);
+        res.send(err);
+    }
+    return reply;
 }
 
 generateAccessToken = (user) => {
