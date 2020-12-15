@@ -41,6 +41,6 @@ exports.checkToken = (req, res, next) => {
     //     req.token = token;
     //     next();
     // } else {
-    //     res.sendStatus(403);
+    //     res.sendStatus(401);
     // }
 }
