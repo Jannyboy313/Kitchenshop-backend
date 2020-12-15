@@ -2,8 +2,8 @@ const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
 const Address = require('./address.js');
 
-const Customer = sequelize.define('customer', {
-    customer_id: {
+const Users = sequelize.define('user', {
+    user_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement : true
@@ -31,7 +31,12 @@ const Customer = sequelize.define('customer', {
             model: Address,
             key: 'address_id'
         }
+    },
+    role: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'user'
     }
 });
 
-module.exports = (Customer);
+module.exports = (Users);

@@ -1,6 +1,7 @@
 const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
 const Product = require('./product.js');
+const Users = require('./users');
 
 const Orders = sequelize.define('orders', {
     orders_id: {
@@ -13,12 +14,12 @@ const Orders = sequelize.define('orders', {
         defaultValue: Sequelize.NOW,
         allowNull: false
     },
-    customer_id: {
+    user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: customer,
-            key: 'customer_id'
+            model: Users,
+            key: 'user_id'
         }
     },
     articlenumber: {
