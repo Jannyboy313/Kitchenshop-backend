@@ -23,7 +23,7 @@ exports.postLogin = async (req, res) => {
         // res.cookie('XRSF-TOKEN', req.csrfToken());
         res.status(200).send({"token": token, "permission": reply.permission});
     } else {
-        res.status(404).send("User or Password incorrect");
+        res.status(404).send("Email or Password incorrect");
     }
     res.end()
 }
