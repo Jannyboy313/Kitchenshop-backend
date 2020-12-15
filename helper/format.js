@@ -5,16 +5,20 @@ exports.formatRegisterData = (body) => {
 }
 
 formatNameData = (body) => {
-    body.user.firstname = body.user.firstname.toLowerCase().charAt(0).toUpperCase().trim();
+    body.user.firstname = capitalizeFirstLetter(body.user.firstname).trim();
     body.user.middlename = body.user.middlename.toLowerCase().trim();
-    body.user.lastname = body.user.firstname.toLowerCase().charAt(0).toUpperCase().trim();
+    body.user.lastname = capitalizeFirstLetter(body.user.lastname).trim();
     body.user.email = body.user.email.toLowerCase().trim();
     return body;
 }
 
 formatAddressData = (body) => {
-    body.address.city = body.address.city.toLowerCase().charAt(0).toUpperCase().trim();
-    body.address.street_address = body.address.street_address.toLowerCase().charAt(0).toUpperCase().trim();
+    body.address.city = capitalizeFirstLetter(body.address.city).trim();
+    body.address.street_address = capitalizeFirstLetter(body.address.street_address).trim();
     body.address.zipcode = body.address.zipcode.toUpperCase().split(" ").join("").trim();
     return body;
+}
+
+capitalizeFirstLetter = (word) => {
+    return word.toLowerCase().charAt(0).toUpperCase() + word.slice(1)
 }
