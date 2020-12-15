@@ -55,7 +55,7 @@ exports.postRegister = async(req, res) => {
         console.log(err);
         res.send(err);
     }
-    res.status("")
+    res.status(201).send(reply)
 }
 
 exports.addressLookup = async(address) => {
