@@ -34,23 +34,45 @@ exports.postLogin = async (req, res) => {
 
 exports.postRegister = async(req, res) => {
     let body = req.body;
+    const hashedPassword = await bcrypt.hash(body.user.password, 12);
+    let reply
     if (!validateUser.validateUser(body.user) && !validateAddress.validateAddres(body.address)) {
         res.status(406).send("Incorrect data send");
         res.end();
     }
-    body = format.formatName(body);
+    body = format.formatRegisterData(body);
     try {
-        address = await Address.findOrCreate({
+        address = await addressLookup(body.address)[0].address_id;
+        reply = await Users.create({
+            firstname: body.user.firstname,
+            middlename: body.user.middlename,
+            lastname: body.user.lastname,
+            email: body.user.email,
+            password: hashedPassword,
+            address_id: address
+        })
+    } catch(err) {
+        console.log(err);
+        res.send(err);
+    }
+    res.status("")
+}
+
+exports.addressLookup = async(address) => {
+    let reply;
+    try {
+        reply = await Address.findOrCreate({
             where: {
-                city: body.address.city,
-                street_addres: body.address.street_address,
-                zipcode: body.address.zipcode
+                city: address.city,
+                street_address: address.street_address,
+                zipcode: address.zipcode
             }
           })
-    } catch {
-        res.send(err.message);
-        res.end();
+    } catch(err) {
+        console.log(err);
+        return null;
     }
+    return reply;
 }
 
 generateAccessToken = (user) => {
