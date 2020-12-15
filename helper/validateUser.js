@@ -42,11 +42,7 @@ validateEmail = (email) => {
 validateExistence = async(email) => {
     let existence;
     try{
-        existence = await Users.findOne({
-            where: {
-                email: email,
-            }
-        })
+        existence = await Users.findByPk(email);
     } catch(err) {
         return false;
     }
