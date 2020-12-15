@@ -7,15 +7,15 @@ const Address = sequelize.define('address', {
         autoIncrement : true
     },
     city: {
-        type: Sequelize.STRING(45),
+        type: Sequelize.STRING(50),
         allowNull: false
     },
     street_address: {
-        type: Sequelize.STRING(45),
+        type: Sequelize.STRING(50),
         allowNull: false
     },
     zipcode: {
-        type: Sequelize.STRING(45),
+        type: Sequelize.STRING(50),
         allowNull: false,
         unique: true
     }

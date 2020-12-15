@@ -1,7 +1,7 @@
 import sequelize, { Sequelize } from '../db/connection.js';
 
 const Product = sequelize.define('product', {
-    articlenumber: {
+    productnumber: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement : true
