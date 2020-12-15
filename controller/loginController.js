@@ -27,6 +27,10 @@ exports.postLogin = async (req, res) => {
     res.end()
 }
 
+exports.postRegister = async(req, res) => {
+    
+}
+
 
 generateAccessToken = (user) => {
     jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1800s" });
