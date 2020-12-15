@@ -48,8 +48,8 @@ module.exports = {
                 "tags": [
                     "Login"
                 ],
-                "summary": "Returns the username and permission",
-                "description": "This is used to validate the login and seeing if its an admin or user",
+                "summary": "Returns a statuscode and the proccessed data",
+                "description": "This is used for registering a new customer",
                 "parameters": [
                     {
                         "in": "body",
@@ -57,23 +57,88 @@ module.exports = {
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "username": {
-                                    "type": "string"
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "firstname": {
+                                            "type": "string"
+                                        },
+                                        "middlename": {
+                                            "type": "string"
+                                        },
+                                        "lastname": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        }
+                                    },
                                 },
-                                "password": {
-                                    "type": "string"
-                                }
-                            }
+                                "address": {
+                                    "type": "object",
+                                    "properties": {
+                                        "city": {
+                                            "type": "string"
+                                        },
+                                        "street_address": {
+                                            "type": "string"
+                                        },
+                                        "zipcode": {
+                                            "type": "string"
+                                        },
+                                },
+                            },
                         },
                         "description": "The username and password in JSON"
                     }
+                }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/login"
-                        }
+                            "type": "object",
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "properties": {
+                                        "firstname": {
+                                            "type": "string"
+                                        },
+                                        "middlename": {
+                                            "type": "string"
+                                        },
+                                        "lastname": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        }
+                                    },
+                                },
+                                "address": {
+                                    "type": "object",
+                                    "properties": {
+                                        "city": {
+                                            "type": "string"
+                                        },
+                                        "street_address": {
+                                            "type": "string"
+                                        },
+                                        "zipcode": {
+                                            "type": "string"
+                                        },
+                                },
+                            },
+                        },
+                        "description": "The username and password in JSON"
+                    }
                     },
                     "404": {
                         "description": "User not found"
