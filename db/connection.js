@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
 require('dotenv/config');
 
-exports.sequelize = new Sequelize(process.env.DATABASE_CONNECTION, {
+const sequelize = new Sequelize(process.env.DATABASE_CONNECTION, {
     pool: {
         max: 5,
         min: 0,
@@ -10,3 +10,5 @@ exports.sequelize = new Sequelize(process.env.DATABASE_CONNECTION, {
     },
     dialect: 'postgres'
 })
+
+module.exports = sequelize;
