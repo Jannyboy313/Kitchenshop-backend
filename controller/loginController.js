@@ -1,4 +1,4 @@
-const Customer = require('../model/customer.js');
+const Users = require('../model/users.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -8,7 +8,7 @@ exports.postLogin = async (req, res) => {
     const password = req.body.password;
 
     try{
-        reply = await Customer.findAll({
+        reply = await Users.findAll({
             where: {
                 email: email,
             }
