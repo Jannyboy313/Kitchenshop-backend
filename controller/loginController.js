@@ -37,23 +37,33 @@ exports.postRegister = async(req, res) => {
     body.user.password = await bcrypt.hash(body.user.password, 12);
     let createdUser;
 
-    if (isDataValid(body)) {
-        res.status(406).send(body);
+    if (!isDataValid(body)) {
+        res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
     }
+    body = format.formatRegisterData(body);
     try {
         address_id = await getAddress_id(body.address);
         createdUser = await createUser(body, address_id)
     } catch(err) {
-        console.log(err);
-        res.send(err);
+        res.status(406).send({"error": err});
+        res.end();
+        return;
+    }
+    if (!createdUser) {
+        res.status(406).send({"error": "Email does already exist"});
+        res.end()
+        return;
     }
     res.status(201).send(createdUser)
+    res.end()
 }
 
 isDataValid = (body) => {
-    if (!validateUser.validateUser(body.user) || !validateAddress.validateAddress(body.address)) {
+    const isUserValid = validateUser.isUserDataValid(body.user);
+    const isAddressValid = validateAddress.isAddressValid(body.address);
+    if (!isUserValid || !isAddressValid) {
         return false;
     }
     return true;
@@ -84,12 +94,11 @@ createUser = async(body, address_id) => {
             middlename: body.user.middlename,
             lastname: body.user.lastname,
             email: body.user.email,
-            password: hashedPassword,
+            password: body.user.password,
             address_id: address_id
         })
     } catch(err) {
-        console.log(err);
-        res.send(err);
+        return false;
     }
     return reply;
 }
