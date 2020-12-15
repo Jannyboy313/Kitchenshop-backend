@@ -28,9 +28,12 @@ exports.postLogin = async (req, res) => {
 }
 
 exports.postRegister = async(req, res) => {
-    
+    req.body.firstname;
+    req.body.lastname;
+    req.body.email;
+    req.body.password;
+    req.body.address_id;
 }
-
 
 generateAccessToken = (user) => {
     jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1800s" });
