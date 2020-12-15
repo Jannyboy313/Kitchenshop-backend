@@ -8,19 +8,31 @@ exports.postLogin = async (req, res) => {
     const password = req.body.password;
 
     try{
-        reply = await Customer.findAll()
+        reply = await Customer.findAll({
+            where: {
+                email: email,
+            }
+        })
     } catch(err) {
         res.send(err.message);
         res.end();
     }
-    const isValidPass = await bcrypt.compare(password, reply.password)
-
+    const isValidPass = await bcrypt.compare(password, reply[0].password)
     if (isValidPass) {
-        const token = await jwt.sign({user: reply}, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
+        const token = generateAccessToken(reply[0]);
+        const refreshToken = generateRefreshToken(reply[0]);
         // res.cookie('XRSF-TOKEN', req.csrfToken());
         res.status(200).send({"token": token, "permission": reply.permission});
     } else {
         res.status(404).send("User or Password incorrect");
     }
     res.end()
+}
+
+generateAccessToken = (user) => {
+    jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "20s" });
+}
+
+generateRefreshToken = (user) => {
+    jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 }
