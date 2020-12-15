@@ -1,4 +1,6 @@
-import sequelize, { Sequelize } from '../db/connection.js';
+const sequelize = require('../db/connection.js');
+const Sequelize = require('sequelize');
+const Address = require('./address.js');
 
 const Customer = sequelize.define('customer', {
     customer_id: {

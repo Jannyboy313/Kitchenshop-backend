@@ -1,4 +1,5 @@
-import sequelize, { Sequelize } from '../db/connection.js';
+const sequelize = require('../db/connection.js');
+const Sequelize = require('sequelize');
 
 const Address = sequelize.define('address', {
     address_id: {

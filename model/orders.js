@@ -1,4 +1,6 @@
-import sequelize, { Sequelize } from '../db/connection.js';
+const sequelize = require('../db/connection.js');
+const Sequelize = require('sequelize');
+const Product = require('./product.js');
 
 const Orders = sequelize.define('orders', {
     orders_id: {
