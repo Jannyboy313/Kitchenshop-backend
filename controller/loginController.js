@@ -1,17 +1,26 @@
-const loginQueries = require("../DOW/queries/loginQueries.js")
+const Customer = require('../model/customer.js');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-exports.getLoginInfo = async (req, res) => {
+exports.postLogin = async (req, res) => {
     let reply;
-    const credentials = req.body;
+    const email = req.body.email;
+    const password = req.body.password;
+
     try{
-        reply = await loginQueries.getLogin(credentials)
+        reply = await Customer.findAll()
     } catch(err) {
-        console.error(err.message);
+        res.send(err.message);
+        res.end();
     }
-    if (typeof reply === 'object' && reply !== null) {
-        res.status(200).send(reply)
+    const isValidPass = await bcrypt.compare(password, reply.password)
+
+    if (isValidPass) {
+        const token = await jwt.sign({user: reply}, process.env.TOKEN_SECRET, { expiresIn: "1800s" });
+        // res.cookie('XRSF-TOKEN', req.csrfToken());
+        res.status(200).send({"token": token, "permission": reply.permission});
     } else {
-        res.status(404).send("User not found")
+        res.status(404).send("User or Password incorrect");
     }
     res.end()
-};
+}
