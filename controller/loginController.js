@@ -1,6 +1,11 @@
-const Users = require('../model/users.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+const Users = require('../model/users.js');
+const Address = require('../model/address.js');
+const validateUser = require('../helper/validateUser.js');
+const validateAddress = require('../helper/validateAddress.js')
+const format = require('../helper/format.js');
 
 exports.postLogin = async (req, res) => {
     let reply;
@@ -28,11 +33,24 @@ exports.postLogin = async (req, res) => {
 }
 
 exports.postRegister = async(req, res) => {
-    req.body.firstname;
-    req.body.lastname;
-    req.body.email;
-    req.body.password;
-    req.body.address_id;
+    let body = req.body;
+    if (!validateUser.validateUser(body) && !validateAddress.validateAddres(body)) {
+        res.status(406).send("Incorrect data send");
+        res.end();
+    }
+    body = format.formatName(body);
+    try {
+        address = await Address.findOrCreate({
+            where: {
+                city: body.city,
+                street_addres: body.street_address,
+                zipcode: body.zipcode
+            }
+          })
+    } catch {
+        res.send(err.message);
+        res.end();
+    }
 }
 
 generateAccessToken = (user) => {
