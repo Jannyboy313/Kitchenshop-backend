@@ -3,10 +3,7 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerdocument = require("./util/swagger")
 const cors = require('cors');
-
-
-const loginRouter = require('./routes/loginRouter.js');
-const templateRouter = require('./routes/template.js');
+require('dotenv/config');
 
 const app = express();
 
@@ -17,8 +14,8 @@ app.use(bodyParser.json())
 app.use(cors());
 
 //ROUTES
-app.use(loginRouter)
-app.use(templateRouter)
+// app.use(loginRouter)
+// app.use(templateRouter)
 
 //LISTENER
 app.listen(process.env.PORT, () => {
