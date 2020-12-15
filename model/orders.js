@@ -8,6 +8,7 @@ const Orders = sequelize.define('orders', {
     },
     timestamp: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false
     },
     customer_id: {
