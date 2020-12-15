@@ -12,6 +12,10 @@ const Users = sequelize.define('user', {
         type: Sequelize.STRING(50),
         allowNull: false
     },
+    middlename: {
+        type: Sequelize.STRING(10),
+        allowNull: true
+    },
     lastname: {
         type: Sequelize.STRING(50),
         allowNull: false
