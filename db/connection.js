@@ -8,7 +8,10 @@ const sequelize = new Sequelize(process.env.DATABASE_CONNECTION, {
         acquire: 30000,
         idle: 10000
     },
-    dialect: 'postgres'
+    dialect: 'postgres',
+    define: {
+        timestamps: false
+    }
 })
 
 module.exports = sequelize;
