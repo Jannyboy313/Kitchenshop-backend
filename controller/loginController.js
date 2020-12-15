@@ -34,7 +34,7 @@ exports.postLogin = async (req, res) => {
 
 exports.postRegister = async(req, res) => {
     let body = req.body;
-    if (!validateUser.validateUser(body) && !validateAddress.validateAddres(body)) {
+    if (!validateUser.validateUser(body.user) && !validateAddress.validateAddres(body.address)) {
         res.status(406).send("Incorrect data send");
         res.end();
     }
@@ -42,9 +42,9 @@ exports.postRegister = async(req, res) => {
     try {
         address = await Address.findOrCreate({
             where: {
-                city: body.city,
-                street_addres: body.street_address,
-                zipcode: body.zipcode
+                city: body.address.city,
+                street_addres: body.address.street_address,
+                zipcode: body.address.zipcode
             }
           })
     } catch {

@@ -1,9 +1,9 @@
 exports.formatName = (body) => {
-    body.firstname = body.firstname.toLowerCase().charAt(0).toUpperCase();
-    body.lastname = body.firstname.toLowerCase().charAt(0).toUpperCase();
-    body.email = body.email.toLowerCase();
-    if (body.middlename !== null) {
-        body.middlename = body.middlename.toLowerCase();
+    body.user.firstname = body.user.firstname.toLowerCase().charAt(0).toUpperCase();
+    body.user.lastname = body.user.firstname.toLowerCase().charAt(0).toUpperCase();
+    body.user.email = body.user.email.toLowerCase();
+    if (body.user.middlename !== null) {
+        body.user.middlename = body.user.middlename.toLowerCase();
     }
     return body;
 }
