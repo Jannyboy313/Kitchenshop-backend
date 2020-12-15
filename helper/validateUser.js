@@ -25,7 +25,7 @@ validateName = (firstname, lastname) => {
 }
 
 validateMiddlename = (middlename) => {
-    if(regName.test(middlename) && middlename !== null) {
+    if(regName.test(middlename) && middlename !== '') {
         return true;
     }else{
         return false;

@@ -6,11 +6,9 @@ exports.formatRegisterData = (body) => {
 
 formatNameData = (body) => {
     body.user.firstname = body.user.firstname.toLowerCase().charAt(0).toUpperCase().trim();
+    body.user.middlename = body.user.middlename.toLowerCase().trim();
     body.user.lastname = body.user.firstname.toLowerCase().charAt(0).toUpperCase().trim();
     body.user.email = body.user.email.toLowerCase().trim();
-    if (body.user.middlename !== null) {
-        body.user.middlename = body.user.middlename.toLowerCase().trim();
-    }
     return body;
 }
 
