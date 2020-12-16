@@ -1,4 +1,6 @@
-import sequelize, { Sequelize } from '../db/connection.js';
+const sequelize = require('../db/connection.js');
+const Sequelize = require('sequelize');
+const Category = require('./category.js');
 
 const Product = sequelize.define('product', {
     productnumber: {
