@@ -6,6 +6,7 @@ const cors = require('cors');
 require('dotenv/config');
 
 const loginRouter = require('./routes/loginRouter.js');
+const productRouter = require('./routes/productRouter.js');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 //ROUTES
 app.use(loginRouter);
+app.use(productRouter);
 
 //LISTENER
 app.listen(process.env.PORT, () => {
