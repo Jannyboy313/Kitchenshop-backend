@@ -1,4 +1,5 @@
 const productController = require("../controller/productController.js");
+const isAuth = require('../middelware/isAuth.js');
 const express = require('express');
 
 const router = express.Router();
