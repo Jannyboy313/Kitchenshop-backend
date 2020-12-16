@@ -42,7 +42,7 @@ module.exports = {
                         }
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": {"error": "Email or Password incorrect"}
                     }
                 }
             }
