@@ -24,3 +24,21 @@ exports.getProduct = async (req, res) => {
     res.end()
 }
 
+exports.getProducts = async (req, res) => {
+    let reply;
+
+    try{
+        reply = await Products.findAll()
+    } catch(err) {
+        res.status(404).send(err.message);
+        res.end();
+        return;
+    }
+    if (!reply) {
+        res.status(404).send({"error": "No products exist"});
+        res.end()
+        return;
+    }
+    res.status(200).send(reply);
+    res.end()
+}
