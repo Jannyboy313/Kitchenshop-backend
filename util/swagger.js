@@ -104,48 +104,11 @@ module.exports = {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "user": {
-                                    "type": "object",
-                                    "properties": {
-                                        "firstname": {
-                                            "type": "string"
-                                        },
-                                        "middlename": {
-                                            "type": "string"
-                                        },
-                                        "lastname": {
-                                            "type": "string"
-                                        },
-                                        "email": {
-                                            "type": "string"
-                                        },
-                                        "password": {
-                                            "type": "string"
-                                        }
-                                    },
-                                },
-                                "address": {
-                                    "type": "object",
-                                    "properties": {
-                                        "city": {
-                                            "type": "string"
-                                        },
-                                        "street_address": {
-                                            "type": "string"
-                                        },
-                                        "zipcode": {
-                                            "type": "string"
-                                        },
-                                },
-                            },
+                            "$ref": "#/definitions/user"
                         },
-                        "description": "The username and password in JSON"
-                    }
                     },
-                    "404": {
-                        "description": "User not found"
+                    "406": {
+                        "description": {"error": "error message"}
                     }
                 }
             }
@@ -256,6 +219,35 @@ module.exports = {
                     {"$ref": "#/definitions/product"}
                 ]
             }
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "role": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "middlename": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "address_id": {
+                    "type": "string"
+                }
+            },
         }
     }
 }
