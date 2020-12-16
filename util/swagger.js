@@ -9,8 +9,12 @@ module.exports = {
     "tags": [
         {
             "name": "Login",
-            "description": "Api for login in the database"
+            "description": "Requests regarding the login"
         },
+        {
+            "name": "Products",
+            "description": "Requests regarding product finding/altering"
+        }
     ],
     "paths": {
         "/login": {
@@ -146,6 +150,56 @@ module.exports = {
                 }
             }
         },
+        "/product": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Returns the requested product data",
+                "description": "This is used for collecting data from single product",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "productnumber",
+                        "schema": {
+                            "type": "integer",
+                        },
+                        "description": "The productnumber of needed product information"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        },
+                    },
+                    "404": {
+                        "description": {"error": "Product not found"}
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Returns all products",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/products"
+                        },
+                    },
+                    "404": {
+                        "description": {"error": "No products exist"}
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "login": {
@@ -170,5 +224,38 @@ module.exports = {
                 }
             }
         },
+        "product": {
+            "type": "object",
+            "properties": {
+                "productnumber": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+            }
+        },
+        "products": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/product"},
+                    {"$ref": "#/definitions/product"},
+                    {"$ref": "#/definitions/product"}
+                ]
+            }
+        }
     }
 }
