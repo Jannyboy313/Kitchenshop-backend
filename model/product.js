@@ -17,7 +17,7 @@ const Product = sequelize.define('product', {
         allowNull: true
     },
     price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT(6,2),
         allowNull: false,
     },
     stock: {
