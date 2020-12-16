@@ -27,7 +27,7 @@ exports.postLogin = async (req, res) => {
         const token = generateAccessToken(reply[0]);
         res.status(200).send({"token": token, "permission": reply.permission});
     } else {
-        res.status(404).send("Email or Password incorrect");
+        res.status(404).send({"error": "Email or Password incorrect"});
     }
     res.end()
 }
