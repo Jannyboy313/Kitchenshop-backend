@@ -42,7 +42,15 @@ module.exports = {
                         }
                     },
                     "404": {
-                        "description": {"error": "Email or Password incorrect"}
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -108,7 +116,15 @@ module.exports = {
                         },
                     },
                     "406": {
-                        "description": {"error": "error message"}
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -138,7 +154,15 @@ module.exports = {
                         },
                     },
                     "404": {
-                        "description": {"error": "Product not found"}
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -158,7 +182,15 @@ module.exports = {
                         },
                     },
                     "404": {
-                        "description": {"error": "No products exist"}
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
