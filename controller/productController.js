@@ -1,4 +1,4 @@
-const Products = require('../model/product.js');
+const Products = require('../model/products.js');
 
 exports.getProduct = async (req, res) => {
     let reply;
@@ -41,4 +41,42 @@ exports.getProducts = async (req, res) => {
     }
     res.status(200).send(reply);
     res.end()
+}
+
+exports.addProduct = async (req, res) => {
+    const product = req.body;
+    let createdProduct;
+    try{
+        createdProduct = await createProduct(product);
+        if (product.isImage) {
+
+        }
+    } catch(err) {
+        res.status(404).send(err.message);
+        res.end();
+        return;
+    }
+    if (!reply) {
+        res.status(404).send({"error": "No products exist"});
+        res.end()
+        return;
+    }
+    res.status(200).send(reply);
+    res.end()
+}
+
+createProduct = async(product) => {
+    let reply;
+    try {
+        reply = await Products.create({
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock,
+            category: product.category
+    })
+    } catch(err) {
+        return false;
+    }
+    return reply;
 }
