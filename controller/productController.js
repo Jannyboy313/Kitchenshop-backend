@@ -1,4 +1,5 @@
 const Products = require('../model/products.js');
+const Images = require('../model/images.js');
 
 exports.getProduct = async (req, res) => {
     let reply;
@@ -74,6 +75,20 @@ createProduct = async(product) => {
             price: product.price,
             stock: product.stock,
             category: product.category
+    })
+    } catch(err) {
+        return false;
+    }
+    return reply;
+}
+
+createImage = async(image, productnumber) => {
+    let reply;
+    try {
+        reply = await Images.create({
+            productnumber: productnumber,
+            description: image.description,
+            url: image.url
     })
     } catch(err) {
         return false;
