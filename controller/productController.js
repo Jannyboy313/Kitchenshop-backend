@@ -50,7 +50,7 @@ exports.addProduct = async (req, res) => {
     try{
         createdProduct = await createProduct(product);
         if (product.isImage) {
-
+            // await createImage(image, productnumber)
         }
     } catch(err) {
         res.status(404).send(err.message);
