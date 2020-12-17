@@ -1,6 +1,6 @@
 const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
-const Address = require('./addresses.js');
+const Addresses = require('./addresses.js');
 
 const Users = sequelize.define('user', {
     user_id: {
@@ -32,7 +32,7 @@ const Users = sequelize.define('user', {
     address_id: {
         type: Sequelize.INTEGER,
         references: {
-            model: Address,
+            model: Addresses,
             key: 'address_id'
         }
     },

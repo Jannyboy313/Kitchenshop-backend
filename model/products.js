@@ -1,6 +1,6 @@
 const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
-const Category = require('./categories.js');
+const Categories = require('./categories.js');
 
 const Products = sequelize.define('product', {
     productnumber: {
@@ -27,7 +27,7 @@ const Products = sequelize.define('product', {
     category: {
         type: Sequelize.STRING(50),
         references: {
-            model: Category,
+            model: Categories,
             key: 'name'
         }
     }
