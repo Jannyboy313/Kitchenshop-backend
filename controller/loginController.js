@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../model/users.js');
-const Address = require('../model/address.js');
+const Address = require('../model/addresses.js');
 const validateUser = require('../helper/validateUser.js');
 const validateAddress = require('../helper/validateAddress.js')
 const format = require('../helper/format.js');

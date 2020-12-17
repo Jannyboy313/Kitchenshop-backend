@@ -1,6 +1,6 @@
 const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
-const Address = require('./address.js');
+const Address = require('./addresses.js');
 
 const Users = sequelize.define('user', {
     user_id: {
