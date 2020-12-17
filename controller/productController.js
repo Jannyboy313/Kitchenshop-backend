@@ -45,22 +45,16 @@ exports.getProducts = async (req, res) => {
 }
 
 exports.addProduct = async (req, res) => {
-    const product = req.body;
+    const product = req.body.product;
+    const image = req.body.image;
     let createdProduct;
     try{
         createdProduct = await createProduct(product);
-        if (product.isImage) {
-            // await createImage(image, productnumber)
+        if (image.image.length > 5) {
+            await createImage(image, productnumber)
         }
     } catch(err) {
-        res.status(404).send(err.message);
-        res.end();
-        return;
-    }
-    if (!reply) {
-        res.status(404).send({"error": "No products exist"});
-        res.end()
-        return;
+        console.log(err);
     }
     res.status(200).send(reply);
     res.end()
@@ -94,4 +88,14 @@ createImage = async(image, productnumber) => {
         return false;
     }
     return reply;
+}
+
+uploadImage = async(imageEncode) => {
+    let imageUrl;
+    try {
+        imageUrl = await httprequest
+    } catch(err) {
+        console.log(err);
+    }
+    return imageUrl
 }
