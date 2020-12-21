@@ -20,7 +20,7 @@ const Images = sequelize.define('image', {
         type: Sequelize.STRING(50),
         allowNull: true
     },
-    imageUrl: {
+    image: {
         type: Sequelize.STRING,
         allowNull: false
     }
