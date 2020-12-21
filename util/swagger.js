@@ -518,16 +518,16 @@ module.exports = {
             "type": "object",
             "properties": {
                 "orders_id": {
-                    "type": "string"
-                },
-                "timestamp": {
                     "type": "integer"
                 },
-                "user_id": {
+                "timestamp": {
                     "type": "string"
                 },
+                "user_id": {
+                    "type": "integer"
+                },
                 "articlenumber": {
-                    "type": "string"
+                    "type": "integer"
                 }
             },
         },
