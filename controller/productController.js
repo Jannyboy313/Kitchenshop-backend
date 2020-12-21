@@ -78,6 +78,27 @@ exports.updateProduct = async (req, res) => {
     res.end()
 }
 
+exports.deleteProduct = async (req, res) => {
+    const productnumber = req.query.productnumber;
+    try{
+        await Products.destroy({
+            where: {
+                productnumber: productnumber
+            }
+        })
+        await Images.destroy({
+            where: {
+                productnumber: productnumber
+            }
+        })
+    } catch(err) {
+        res.status(404).send({"error": err});
+        console.log(err);
+    }
+    res.status(200).send(createdProduct);
+    res.end()
+}
+
 createProduct = async(product) => {
     let reply;
     try {
