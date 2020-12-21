@@ -337,6 +337,37 @@ module.exports = {
                 }
             }
         },
+        "/deleteproduct": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Updates a product in database",
+                "description": "This is used for updating a product in database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "productnumber",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "409": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "login": {
