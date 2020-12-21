@@ -95,7 +95,7 @@ exports.deleteProduct = async (req, res) => {
         res.status(404).send({"error": err});
         console.log(err);
     }
-    res.status(200).send(createdProduct);
+    res.status(200);
     res.end()
 }
 
