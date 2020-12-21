@@ -250,7 +250,7 @@ module.exports = {
                             "$ref": "#/definitions/product"
                         },
                     },
-                    "404": {
+                    "406": {
                         "description": "ERROR",
                         "schema": {
                             "type": "object",
@@ -323,7 +323,7 @@ module.exports = {
                             "$ref": "#/definitions/product"
                         },
                     },
-                    "404": {
+                    "409": {
                         "description": "ERROR",
                         "schema": {
                             "type": "object",

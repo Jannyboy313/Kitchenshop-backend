@@ -54,6 +54,7 @@ exports.addProduct = async (req, res) => {
             await createImage(image, createdProduct.productnumber)
         }
     } catch(err) {
+        res.status(406).send({"error": err});
         console.log(err);
     }
     res.status(200).send(createdProduct);
@@ -70,6 +71,7 @@ exports.updateProduct = async (req, res) => {
             await createImage(image, productnumber)
         }
     } catch(err) {
+        res.status(409).send({"error": err});
         console.log(err);
     }
     res.status(200).send(createdProduct);
