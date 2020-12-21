@@ -7,7 +7,7 @@ require('dotenv/config');
 
 const loginRouter = require('./routes/loginRouter.js');
 const productRouter = require('./routes/productRouter.js');
-const orderRouter = require('./controller/orderRouter.js')
+const orderRouter = require('./routes/orderRouter.js')
 
 const app = express();
 
