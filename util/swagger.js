@@ -453,6 +453,33 @@ module.exports = {
                     "type": "string"
                 }
             },
-        }
+        },
+        "order": {
+            "type": "object",
+            "properties": {
+                "orders_id": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "articlenumber": {
+                    "type": "string"
+                }
+            },
+        },
+        "orders": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"}
+                ]
+            }
+        },
     }
 }
