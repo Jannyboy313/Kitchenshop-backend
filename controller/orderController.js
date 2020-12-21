@@ -1,11 +1,13 @@
+const Orders = require('../model/orders.js');
+
 exports.getOrder = async (req, res) => {
-    let orderid = req.query.orderid;
+    let orders_id = req.query.orders_id;
     let reply;
 
     try{
-        reply = await Products.findOne({
+        reply = await Orders.findOne({
             where: {
-                productnumber: productnumber,
+                orders_id: orders_id
             }
         })
     } catch(err) {
@@ -14,7 +16,7 @@ exports.getOrder = async (req, res) => {
         return;
     }
     if (!reply) {
-        res.status(404).send({"error": "Product not found"});
+        res.status(404).send({"error": "Order not found"});
         res.end()
         return;
     }
