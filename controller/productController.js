@@ -60,7 +60,7 @@ exports.addProduct = async (req, res) => {
     res.end()
 }
 
-createProduct = async(product) => {
+exports.createProduct = async(product) => {
     let reply;
     try {
         reply = await Products.create({
