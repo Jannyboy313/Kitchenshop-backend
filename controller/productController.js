@@ -51,6 +51,22 @@ exports.addProduct = async (req, res) => {
     try{
         createdProduct = await createProduct(product);
         if (image.image.length > 5) {
+            await createImage(image, createdProduct.productnumber)
+        }
+    } catch(err) {
+        console.log(err);
+    }
+    res.status(200).send(createdProduct);
+    res.end()
+}
+
+exports.updateProduct = async (req, res) => {
+    const product = req.body.product;
+    const image = req.body.image;
+    let createdProduct;
+    try{
+        createdProduct = await createProduct(product);
+        if (image.image.length > 5) {
             await createImage(image, productnumber)
         }
     } catch(err) {
@@ -76,6 +92,22 @@ createProduct = async(product) => {
     return reply;
 }
 
+updateProduct = async(product) => {
+    let reply;
+    try {
+        reply = await Products.update({
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            stock: product.stock,
+            category: product.category
+    }, {where: product.productnumber})
+    } catch(err) {
+        return false;
+    }
+    return reply;
+}
+
 createImage = async(image, productnumber) => {
     let reply;
     try {
@@ -84,6 +116,19 @@ createImage = async(image, productnumber) => {
             description: image.description,
             url: image.image
     })
+    } catch(err) {
+        return false;
+    }
+    return reply;
+}
+
+updateImage = async(image, productnumber) => {
+    let reply;
+    try {
+        reply = await Images.update({
+            description: image.description,
+            url: image.image
+    }, {where: productnumber})
     } catch(err) {
         return false;
     }
