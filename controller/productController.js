@@ -56,11 +56,11 @@ exports.addProduct = async (req, res) => {
     } catch(err) {
         console.log(err);
     }
-    res.status(200).send(reply);
+    res.status(200).send(createdProduct);
     res.end()
 }
 
-exports.createProduct = async(product) => {
+createProduct = async(product) => {
     let reply;
     try {
         reply = await Products.create({
@@ -82,7 +82,7 @@ createImage = async(image, productnumber) => {
         reply = await Images.create({
             productnumber: productnumber,
             description: image.description,
-            url: image.url
+            url: image.image
     })
     } catch(err) {
         return false;
