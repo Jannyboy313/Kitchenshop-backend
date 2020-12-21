@@ -264,6 +264,79 @@ module.exports = {
                 }
             }
         },
+        "/updateproduct": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Updates a product in database",
+                "description": "This is used for updating a product in database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "product": {
+                                    "type": "object",
+                                    "properties": {
+                                        "productnumber": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "integer"
+                                        },
+                                        "stock": {
+                                            "type": "integer"
+                                        },
+                                        "category": {
+                                            "type": "string"
+                                        }
+                                    },
+                                },
+                                "image": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                },
+                            },
+                        },
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "login": {
