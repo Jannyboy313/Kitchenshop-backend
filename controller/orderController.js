@@ -4,7 +4,7 @@ exports.getCustomerOrders = async (req, res) => {
     let reply;
 
     try{
-        reply = await Orders.findAll({where: {user_id: user_id} })
+        reply = await Orders.findAll({where: {user_id: req.user_id} });
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
@@ -12,18 +12,18 @@ exports.getCustomerOrders = async (req, res) => {
     }
     if (!reply) {
         res.status(404).send({"error": "No orders exist"});
-        res.end()
+        res.end();
         return;
     }
     res.status(200).send(reply);
-    res.end()
+    res.end();
 }
 
 exports.getAdminOrders = async (req, res) => {
     let reply;
 
     try{
-        reply = await Orders.findAll()
+        reply = await Orders.findAll();
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
@@ -31,9 +31,9 @@ exports.getAdminOrders = async (req, res) => {
     }
     if (!reply) {
         res.status(404).send({"error": "No orders exist"});
-        res.end()
+        res.end();
         return;
     }
     res.status(200).send(reply);
-    res.end()
+    res.end();
 }
