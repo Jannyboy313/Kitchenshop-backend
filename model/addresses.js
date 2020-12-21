@@ -1,7 +1,7 @@
 const sequelize = require('../db/connection.js');
 const Sequelize = require('sequelize');
 
-const Address = sequelize.define('address', {
+const Addresses = sequelize.define('address', {
     address_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -22,4 +22,4 @@ const Address = sequelize.define('address', {
     }
 });
 
-module.exports = (Address);
+module.exports = (Addresses);
