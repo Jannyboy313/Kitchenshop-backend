@@ -103,8 +103,7 @@ module.exports = {
                                         },
                                 },
                             },
-                        },
-                        "description": "The username and password in JSON"
+                        }
                     }
                 }
                 ],
@@ -201,7 +200,7 @@ module.exports = {
                     "Products"
                 ],
                 "summary": "Adds a product to the database",
-                "description": "This is used for adding a product to the database",
+                "description": "This is used for adding a product to the database\nThe image is optional but when added it should be in bytea!",
                 "parameters": [
                     {
                         "in": "body",
@@ -241,7 +240,6 @@ module.exports = {
                                 },
                             },
                         },
-                        "description": "The product and (optional) image"
                     }
                 }
                 ],
