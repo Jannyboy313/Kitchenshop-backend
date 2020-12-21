@@ -14,6 +14,10 @@ module.exports = {
         {
             "name": "Products",
             "description": "Requests regarding product finding/altering"
+        },
+        {
+            "name": "Orders",
+            "description": "Requests regarding order finding/altering"
         }
     ],
     "paths": {
@@ -355,6 +359,62 @@ module.exports = {
                         "description": "OK",
                     },
                     "409": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customerorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/adminorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
                         "description": "ERROR",
                         "schema": {
                             "type": "object",
