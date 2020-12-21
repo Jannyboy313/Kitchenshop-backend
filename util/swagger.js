@@ -265,7 +265,7 @@ module.exports = {
             }
         },
         "/updateproduct": {
-            "post": {
+            "put": {
                 "tags": [
                     "Products"
                 ],
