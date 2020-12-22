@@ -110,7 +110,7 @@ createProduct = async(product) => {
             category: product.category
     })
     } catch(err) {
-        return false;
+        return err;
     }
     return reply;
 }
@@ -126,7 +126,7 @@ updateProduct = async(product) => {
             category: product.category
     }, {where: product.productnumber})
     } catch(err) {
-        return false;
+        return err;
     }
     return reply;
 }
@@ -140,7 +140,7 @@ createImage = async(image, productnumber) => {
             url: image.image
     })
     } catch(err) {
-        return false;
+        return err;
     }
     return reply;
 }
@@ -153,7 +153,7 @@ updateImage = async(image, productnumber) => {
             url: image.image
     }, {where: productnumber})
     } catch(err) {
-        return false;
+        return err;
     }
     return reply;
 }

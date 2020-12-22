@@ -14,6 +14,10 @@ module.exports = {
         {
             "name": "Products",
             "description": "Requests regarding product finding/altering"
+        },
+        {
+            "name": "Orders",
+            "description": "Requests regarding order finding/altering"
         }
     ],
     "paths": {
@@ -342,8 +346,8 @@ module.exports = {
                 "tags": [
                     "Products"
                 ],
-                "summary": "Updates a product in database",
-                "description": "This is used for updating a product in database",
+                "summary": "Deletes a product in the database",
+                "description": "This is used for deleting a product in the database",
                 "parameters": [
                     {
                         "in": "query",
@@ -354,7 +358,165 @@ module.exports = {
                     "200": {
                         "description": "OK",
                     },
-                    "409": {
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customerorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/adminorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addorders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Adds a order(s) to the database",
+                "description": "This is used for adding a order to the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                ]
+                            }
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteorder": {
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Deletes a order in the database",
+                "description": "This is used for deleting a order in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "orders_id",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
                         "description": "ERROR",
                         "schema": {
                             "type": "object",
@@ -453,6 +615,33 @@ module.exports = {
                     "type": "string"
                 }
             },
-        }
+        },
+        "order": {
+            "type": "object",
+            "properties": {
+                "orders_id": {
+                    "type": "integer"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "articlenumber": {
+                    "type": "integer"
+                }
+            },
+        },
+        "orders": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"}
+                ]
+            }
+        },
     }
 }

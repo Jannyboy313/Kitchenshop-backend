@@ -22,7 +22,7 @@ const Orders = sequelize.define('orders', {
             key: 'user_id'
         }
     },
-    articlenumber: {
+    productnumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
