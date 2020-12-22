@@ -51,6 +51,22 @@ exports.addOrders = async (req, res) => {
     res.end()
 }
 
+exports.deleteOrder = async (req, res) => {
+    const orders_id = req.query.orders_id;
+    try{
+        await Orders.destroy({
+            where: {
+                orders_id: orders_id
+            }
+        })
+    } catch(err) {
+        res.status(404).send({"error": err});
+        console.log(err);
+    }
+    res.status(200);
+    res.end()
+}
+
 createOrders = async(orders) => {
     const createdOrders = [];
     let reply;
@@ -66,20 +82,4 @@ createOrders = async(orders) => {
         return err;
     }
     return createdOrders;
-}
-
-exports.deleteOrder = async (req, res) => {
-    const orders_id = req.query.orders_id;
-    try{
-        await Orders.destroy({
-            where: {
-                orders_id: orders_id
-            }
-        })
-    } catch(err) {
-        res.status(404).send({"error": err});
-        console.log(err);
-    }
-    res.status(200);
-    res.end()
 }
