@@ -32,6 +32,22 @@ exports.addCategory = async (req, res) => {
     res.end()
 }
 
+exports.deleteCategory = async (req, res) => {
+    const category_name = req.query.category_name;
+    try{
+        await Categories.destroy({
+            where: {
+                name: category_name
+            }
+        })
+    } catch(err) {
+        res.status(404).send({"error": err});
+        console.log(err);
+    }
+    res.status(200);
+    res.end()
+}
+
 createCategory = async(category) => {
     let reply;
     try {
