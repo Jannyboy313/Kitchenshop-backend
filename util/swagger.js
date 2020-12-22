@@ -9,8 +9,20 @@ module.exports = {
     "tags": [
         {
             "name": "Login",
-            "description": "Api for login in the database"
+            "description": "Requests regarding the login"
         },
+        {
+            "name": "Products",
+            "description": "Requests regarding product finding/altering"
+        },
+        {
+            "name": "Orders",
+            "description": "Requests regarding order finding/altering"
+        },
+        {
+            "name": "Categories",
+            "description": "Requests regarding category finding/altering"
+        }
     ],
     "paths": {
         "/login": {
@@ -38,7 +50,15 @@ module.exports = {
                         }
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -91,8 +111,7 @@ module.exports = {
                                         },
                                 },
                             },
-                        },
-                        "description": "The username and password in JSON"
+                        }
                     }
                 }
                 ],
@@ -100,48 +119,513 @@ module.exports = {
                     "200": {
                         "description": "OK",
                         "schema": {
+                            "$ref": "#/definitions/user"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
                             "type": "object",
                             "properties": {
-                                "user": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Returns the requested product data",
+                "description": "This is used for collecting data from single product",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "productnumber",
+                        "schema": {
+                            "type": "integer",
+                        },
+                        "description": "The productnumber of needed product information"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Returns all products",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/products"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addproduct": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Adds a product to the database",
+                "description": "This is used for adding a product to the database\nThe image is optional but when added it should be in bytea!",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "product": {
                                     "type": "object",
                                     "properties": {
-                                        "firstname": {
+                                        "name": {
                                             "type": "string"
                                         },
-                                        "middlename": {
+                                        "description": {
                                             "type": "string"
                                         },
-                                        "lastname": {
-                                            "type": "string"
+                                        "price": {
+                                            "type": "integer"
                                         },
-                                        "email": {
-                                            "type": "string"
+                                        "stock": {
+                                            "type": "integer"
                                         },
-                                        "password": {
+                                        "category": {
                                             "type": "string"
                                         }
                                     },
                                 },
-                                "address": {
+                                "image": {
                                     "type": "object",
                                     "properties": {
-                                        "city": {
+                                        "image": {
                                             "type": "string"
                                         },
-                                        "street_address": {
-                                            "type": "string"
-                                        },
-                                        "zipcode": {
+                                        "description": {
                                             "type": "string"
                                         },
                                 },
                             },
                         },
-                        "description": "The username and password in JSON"
                     }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/updateproduct": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Updates a product in database",
+                "description": "This is used for updating a product in database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "product": {
+                                    "type": "object",
+                                    "properties": {
+                                        "productnumber": {
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "integer"
+                                        },
+                                        "stock": {
+                                            "type": "integer"
+                                        },
+                                        "category": {
+                                            "type": "string"
+                                        }
+                                    },
+                                },
+                                "image": {
+                                    "type": "object",
+                                    "properties": {
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                },
+                            },
+                        },
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/product"
+                        },
+                    },
+                    "409": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteproduct": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Deletes a product in the database",
+                "description": "This is used for deleting a product in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "productnumber",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                     },
                     "404": {
-                        "description": "User not found"
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/customerorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/adminorders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Returns all orders from the specific customer",
+                "description": "This is used for collecting data from single product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addorders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Adds a order(s) to the database",
+                "description": "This is used for adding a order to the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                ]
+                            }
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteorder": {
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Deletes a order in the database",
+                "description": "This is used for deleting a order in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "orders_id",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Returns all categories",
+                "description": "This is used for getting all the categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/categories"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addcategory": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Adds a category to the database",
+                "description": "This is used for adding a category to the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deletecategory": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Deletes a category in the database",
+                "description": "This is used for deleting a category in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "name",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -168,6 +652,116 @@ module.exports = {
                 "role": {
                     "type": "string"
                 }
+            }
+        },
+        "product": {
+            "type": "object",
+            "properties": {
+                "productnumber": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "stock": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+            }
+        },
+        "products": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/product"},
+                    {"$ref": "#/definitions/product"},
+                    {"$ref": "#/definitions/product"}
+                ]
+            }
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "role": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "middlename": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "address_id": {
+                    "type": "string"
+                }
+            },
+        },
+        "order": {
+            "type": "object",
+            "properties": {
+                "orders_id": {
+                    "type": "integer"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "articlenumber": {
+                    "type": "integer"
+                }
+            },
+        },
+        "orders": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"},
+                    {"$ref": "#/definitions/order"}
+                ]
+            }
+        },
+        "category": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+        },
+        "categories": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/category"},
+                    {"$ref": "#/definitions/category"},
+                    {"$ref": "#/definitions/category"}
+                ]
             }
         },
     }

@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Users = require('../model/users.js');
-const Address = require('../model/address.js');
+const Address = require('../model/addresses.js');
 const validateUser = require('../helper/validateUser.js');
 const validateAddress = require('../helper/validateAddress.js')
 const format = require('../helper/format.js');
@@ -27,7 +27,7 @@ exports.postLogin = async (req, res) => {
         const token = generateAccessToken(reply[0]);
         res.status(200).send({"token": token, "permission": reply.permission});
     } else {
-        res.status(404).send("Email or Password incorrect");
+        res.status(404).send({"error": "Email or Password incorrect"});
     }
     res.end()
 }
