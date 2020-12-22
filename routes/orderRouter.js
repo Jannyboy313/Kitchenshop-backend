@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/customerorders", orderController.getCustomerOrders);
 router.get("/adminorders", orderController.getAdminOrders);
-// router.get("/addorder", orderController.getOrders);
+router.post("/addorders", orderController.addOrders);
 // router.get("/deleteorder", orderController.getOrders);
 
 

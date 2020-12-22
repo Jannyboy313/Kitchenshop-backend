@@ -37,3 +37,33 @@ exports.getAdminOrders = async (req, res) => {
     res.status(200).send(reply);
     res.end();
 }
+
+exports.addOrders = async (req, res) => {
+    const orders = req.body;
+    let createdOrders;
+    try{
+        createdOrders = await createOrders(orders);
+    } catch(err) {
+        res.status(406).send({"error": err});
+        console.log(err);
+    }
+    res.status(200).send(createdOrders);
+    res.end()
+}
+
+createOrders = async(orders) => {
+    const createdOrders = [];
+    let reply;
+    try {
+        for (let order of orders) {
+            reply = await Orders.create({
+                user_id: order.user_id,
+                productnumber: order.productnumber
+            });
+            createdOrders.push(reply);
+        }
+    } catch(err) {
+        return err;
+    }
+    return createdOrders;
+}
