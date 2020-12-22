@@ -18,6 +18,10 @@ module.exports = {
         {
             "name": "Orders",
             "description": "Requests regarding order finding/altering"
+        },
+        {
+            "name": "Categories",
+            "description": "Requests regarding category finding/altering"
         }
     ],
     "paths": {
@@ -530,6 +534,102 @@ module.exports = {
                 }
             }
         },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Returns all categories",
+                "description": "This is used for getting all the categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/categories"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addcategory": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Adds a category to the database",
+                "description": "This is used for adding a category to the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/category"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deletecategory": {
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Deletes a category in the database",
+                "description": "This is used for deleting a category in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "name",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "login": {
@@ -640,6 +740,27 @@ module.exports = {
                     {"$ref": "#/definitions/order"},
                     {"$ref": "#/definitions/order"},
                     {"$ref": "#/definitions/order"}
+                ]
+            }
+        },
+        "category": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+        },
+        "categories": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/category"},
+                    {"$ref": "#/definitions/category"},
+                    {"$ref": "#/definitions/category"}
                 ]
             }
         },

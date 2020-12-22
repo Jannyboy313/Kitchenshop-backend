@@ -1,13 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
-const swaggerdocument = require("./util/swagger")
+const swaggerdocument = require("./util/swagger.js")
 const cors = require('cors');
 require('dotenv/config');
 
 const loginRouter = require('./routes/loginRouter.js');
 const productRouter = require('./routes/productRouter.js');
 const orderRouter = require('./routes/orderRouter.js')
+const categoryRouter = require('./routes/categoryRouter.js')
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(loginRouter);
 app.use(productRouter);
 app.use(orderRouter);
+app.use(categoryRouter);
 
 //LISTENER
 app.listen(process.env.PORT, () => {
