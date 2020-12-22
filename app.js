@@ -8,6 +8,7 @@ require('dotenv/config');
 const loginRouter = require('./routes/loginRouter.js');
 const productRouter = require('./routes/productRouter.js');
 const orderRouter = require('./routes/orderRouter.js')
+const categoryRouter = require('./routes/categoryRouter.js')
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(loginRouter);
 app.use(productRouter);
 app.use(orderRouter);
+app.use(categoryRouter);
 
 //LISTENER
 app.listen(process.env.PORT, () => {
