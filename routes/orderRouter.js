@@ -4,10 +4,10 @@ const express = require('express');
 
 const router = express.Router();
 
-// router.get("/order", orderController.getOrder);
-// router.get("/orders", orderController.getOrders);
-// router.get("/addorder", orderController.getOrders);
-// router.get("/deleteorder", orderController.getOrders);
+router.get("/customerorders", orderController.getCustomerOrders);
+router.get("/adminorders", orderController.getAdminOrders);
+router.post("/addorders", orderController.addOrders);
+router.delete("/deleteorder", orderController.deleteOrder);
 
 
 module.exports = router;
