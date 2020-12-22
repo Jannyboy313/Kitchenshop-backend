@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/customerorders", orderController.getCustomerOrders);
 router.get("/adminorders", orderController.getAdminOrders);
 router.post("/addorders", orderController.addOrders);
-router.delete("/deleteorders", orderController.deleteOrders);
+router.delete("/deleteorder", orderController.deleteOrder);
 
 
 module.exports = router;
