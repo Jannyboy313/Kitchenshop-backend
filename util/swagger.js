@@ -346,8 +346,8 @@ module.exports = {
                 "tags": [
                     "Products"
                 ],
-                "summary": "Updates a product in database",
-                "description": "This is used for updating a product in database",
+                "summary": "Deletes a product in the database",
+                "description": "This is used for deleting a product in the database",
                 "parameters": [
                     {
                         "in": "query",
@@ -358,7 +358,7 @@ module.exports = {
                     "200": {
                         "description": "OK",
                     },
-                    "409": {
+                    "404": {
                         "description": "ERROR",
                         "schema": {
                             "type": "object",
@@ -413,6 +413,108 @@ module.exports = {
                         "schema": {
                             "$ref": "#/definitions/orders"
                         },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/addorders": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Adds a order(s) to the database",
+                "description": "This is used for adding a order to the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    { "type": "object",
+                                        "properties": {
+                                            "user_id": {
+                                                "type": "integer"
+                                            },
+                                            "productnumber": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                ]
+                            }
+                    }
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/orders"
+                        },
+                    },
+                    "406": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteorder": {
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Deletes a order in the database",
+                "description": "This is used for deleting a order in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "orders_id",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                     },
                     "404": {
                         "description": "ERROR",
