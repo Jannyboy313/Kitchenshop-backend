@@ -25,7 +25,7 @@ exports.postLogin = async (req, res) => {
     const isValidPass = await bcrypt.compare(password, reply[0].password)
     if (isValidPass) {
         const token = generateAccessToken(reply[0]);
-        res.status(200).send({"token": token, "role": reply.role});
+        res.status(200).send({"token": token, "role": reply[0].role});
     } else {
         res.status(404).send({"error": "Email or Password incorrect"});
     }
@@ -104,5 +104,5 @@ createUser = async(body, address_id) => {
 }
 
 generateAccessToken = (user) => {
-    jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1800s" });
+    return jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1800s" });
 }
