@@ -20,9 +20,12 @@ isNameCorrect = (firstname, lastname) => {
 }
 
 isMiddelnameCorrect = (middlename) => {
-    if(regName.test(middlename) && middlename !== '') {
+    console.log("inside middlename check")
+    if(regName.test(middlename) || middlename === '') {
+        console.log('Returning true')
         return true;
     }else{
+        console.log('Returning false')
         return false;
     }
 }
