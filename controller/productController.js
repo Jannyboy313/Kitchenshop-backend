@@ -105,8 +105,8 @@ createProduct = async(product) => {
         reply = await Products.create({
             name: product.name,
             description: product.description,
-            price: product.price,
-            stock: product.stock,
+            price: parseFloat(product.price),
+            stock: parseInt(product.stock),
             category: product.category
     })
     } catch(err) {
@@ -121,8 +121,8 @@ updateProduct = async(product) => {
         reply = await Products.update({
             name: product.name,
             description: product.description,
-            price: product.price,
-            stock: product.stock,
+            price: parseFloat(product.price),
+            stock: parseInt(product.stock),
             category: product.category
     }, {where: product.productnumber})
     } catch(err) {
