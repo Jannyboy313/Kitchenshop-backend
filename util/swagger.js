@@ -646,10 +646,10 @@ module.exports = {
         "loginresponse": {
             "type": "object",
             "properties": {
-                "token": {
-                    "type": "string"
+                "user": {
+                    "$ref": "#/definitions/user"
                 },
-                "role": {
+                "token": {
                     "type": "string"
                 }
             }
@@ -687,7 +687,7 @@ module.exports = {
                 ]
             }
         },
-        "user": {
+        "User": {
             "type": "object",
             "properties": {
                 "role": {
