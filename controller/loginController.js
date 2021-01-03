@@ -25,7 +25,8 @@ exports.postLogin = async (req, res) => {
     const isValidPass = await bcrypt.compare(password, reply[0].password)
     if (isValidPass) {
         const token = generateAccessToken(reply[0]);
-        res.status(200).send({"token": token, "role": reply[0].role});
+        reply[0].password = null;
+        res.status(200).send({"User": reply[0], "token": token});
     } else {
         res.status(404).send({"error": "Email or Password incorrect"});
     }
