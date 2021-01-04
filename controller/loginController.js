@@ -22,6 +22,10 @@ exports.postLogin = async (req, res) => {
         res.send(err.message);
         res.end();
     }
+    if (reply.length === 0) {
+        res.status(404).send({"error": "Email or Password incorrect"});
+        return;
+    }
     const isValidPass = await bcrypt.compare(password, reply[0].password)
     if (isValidPass) {
         const token = generateAccessToken(reply[0]);
