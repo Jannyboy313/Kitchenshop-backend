@@ -15,7 +15,7 @@ exports.postLogin = async (req, res) => {
     try{
         reply = await Users.findAll({
             where: {
-                email: email,
+                email: email.toLowerCase(),
             }
         })
     } catch(err) {
