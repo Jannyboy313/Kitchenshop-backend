@@ -383,6 +383,12 @@ module.exports = {
                 ],
                 "summary": "Returns all orders from the specific customer",
                 "description": "This is used for collecting data from single product",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "productnumber",
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -722,14 +728,20 @@ module.exports = {
                 "orders_id": {
                     "type": "integer"
                 },
+                "productnumber": {
+                    "type": "integer"
+                },
                 "timestamp": {
                     "type": "string"
                 },
-                "user_id": {
-                    "type": "integer"
+                "name": {
+                    "type": "string"
                 },
-                "articlenumber": {
-                    "type": "integer"
+                "description": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
                 }
             },
         },
