@@ -1,10 +1,12 @@
 const Orders = require('../model/orders.js');
+const sequelize = require('../db/connection.js');
 
 exports.getCustomerOrders = async (req, res) => {
     let reply;
-
     try{
-        reply = await Orders.findAll({where: {user_id: req.user_id} });
+        reply = await sequelize.query("SELECT o.orders_id, p.productnumber, o.timestamp, p.name, p.description, p.price " +
+                                    "FROM orders o JOIN products p ON o.productnumber = p.productnumber " +
+                                    "WHERE o.user_id = '" + req.query.user_id + "';");
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
@@ -15,7 +17,7 @@ exports.getCustomerOrders = async (req, res) => {
         res.end();
         return;
     }
-    res.status(200).send(reply);
+    res.status(200).send(reply[0]);
     res.end();
 }
 
