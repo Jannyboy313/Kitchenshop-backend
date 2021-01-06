@@ -4,8 +4,8 @@ const sequelize = require('../db/connection.js');
 exports.getCustomerOrders = async (req, res) => {
     let reply;
     try{
-        reply = await sequelize.query("SELECT o.orders_id, p.productnumber, o.timestamp, p.name, p.description, p.price " +
-                                    "FROM orders o JOIN products p ON o.productnumber = p.productnumber " +
+        reply = await sequelize.query("SELECT * FROM orders o JOIN products p " +
+                                    "ON o.productnumber = p.productnumber " +
                                     "WHERE o.user_id = '" + req.query.user_id + "';");
     } catch(err) {
         res.status(404).send(err.message);
