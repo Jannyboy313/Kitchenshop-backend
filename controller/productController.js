@@ -65,18 +65,19 @@ exports.addProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     const product = req.body.product;
-    const image = req.body.image;
-    let createdProduct;
+    let updateProduct;
+    if (!validation.isUserDataValid(product)) {
+        res.status(406).send({"error": "Data is invalid"});
+        res.end();
+        return;
+    }
     try{
-        createdProduct = await createProduct(product);
-        if (image.image.length > 5) {
-            await createImage(image, productnumber)
-        }
+        updateProduct = await updateProduct(product);
     } catch(err) {
         res.status(409).send({"error": err});
         console.log(err);
     }
-    res.status(200).send(createdProduct);
+    res.status(200).send(updateProduct);
     res.end()
 }
 
@@ -104,7 +105,7 @@ exports.deleteProduct = async (req, res) => {
 createProduct = async(product) => {
     let reply;
     try {
-        reply = await Products.create({
+        reply = await Products.update({
             name: product.name,
             description: product.description,
             price: parseFloat(product.price),
