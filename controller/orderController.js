@@ -25,7 +25,8 @@ exports.getAdminOrders = async (req, res) => {
     let reply;
 
     try{
-        reply = await Orders.findAll();
+        reply = await sequelize.query("SELECT * FROM orders o JOIN products p " +
+                                    "ON o.productnumber = p.productnumber;");
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
