@@ -50,7 +50,7 @@ exports.addProduct = async (req, res) => {
     let createdProduct;
     try{
         createdProduct = await createProduct(product);
-        if (image.image.length > 5) {
+        if (image.image) {
             await createImage(image, createdProduct.productnumber)
         }
     } catch(err) {
