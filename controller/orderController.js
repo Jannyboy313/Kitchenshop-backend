@@ -26,7 +26,7 @@ exports.getAdminOrders = async (req, res) => {
 
     try{
         reply = await sequelize.query("SELECT * FROM orders o JOIN products p " +
-                                    "ON o.productnumber = p.productnumber;");
+                                      "ON o.productnumber = p.productnumber;");
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
@@ -37,7 +37,7 @@ exports.getAdminOrders = async (req, res) => {
         res.end();
         return;
     }
-    res.status(200).send(reply);
+    res.status(200).send(reply[0]);
     res.end();
 }
 
