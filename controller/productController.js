@@ -63,21 +63,21 @@ exports.addProduct = async (req, res) => {
     res.end()
 }
 
-exports.updateProduct = async (req, res) => {
+exports.putProduct = async (req, res) => {
     const product = req.body.product;
-    let updateProduct;
+    let updatedProduct;
     if (!validation.isProductDataValid(product)) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
     }
     try{
-        updateProduct = await updateProduct(product);
+        updatedProduct = await updateProduct(product);
     } catch(err) {
         res.status(409).send({"error": err});
         console.log(err);
     }
-    res.status(200).send(updateProduct);
+    res.status(200).send(updatedProduct);
     res.end()
 }
 
@@ -127,7 +127,7 @@ updateProduct = async(product) => {
             price: parseFloat(product.price),
             stock: parseInt(product.stock),
             category: product.category
-    }, {where: product.productnumber})
+    }, {where: {productnumber: product.productnumber}})
     } catch(err) {
         return err;
     }
