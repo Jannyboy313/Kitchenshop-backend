@@ -1,5 +1,5 @@
 const regName = /[a-zA-Z\s]*/;
-const regPrice = /^\d{1,6}(.\d{2})?$/;
+const regPrice = /^(\d{1,6})(\.\d{2})?$/;
 const regStock = /[0-9]{0,4}/;
 
 exports.isProductDataValid = (product) => {
