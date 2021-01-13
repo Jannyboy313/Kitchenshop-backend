@@ -105,7 +105,7 @@ exports.deleteProduct = async (req, res) => {
 createProduct = async(product) => {
     let reply;
     try {
-        reply = await Products.update({
+        reply = await Products.create({
             name: product.name,
             description: product.description,
             price: parseFloat(product.price),
