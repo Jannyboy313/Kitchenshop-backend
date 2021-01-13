@@ -1,5 +1,6 @@
 const Products = require('../model/products.js');
 const Images = require('../model/images.js');
+const validation = require('../helper/validateProduct.js');
 
 exports.getProduct = async (req, res) => {
     let reply;
@@ -46,13 +47,14 @@ exports.getProducts = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
     const product = req.body.product;
-    const image = req.body.image;
     let createdProduct;
+    if (!validation.isProductDataValid(product)) {
+        res.status(406).send({"error": "Data is invalid"});
+        res.end();
+        return;
+    }
     try{
         createdProduct = await createProduct(product);
-        if (image.image.length > 5) {
-            await createImage(image, createdProduct.productnumber)
-        }
     } catch(err) {
         res.status(406).send({"error": err});
         console.log(err);
@@ -61,20 +63,21 @@ exports.addProduct = async (req, res) => {
     res.end()
 }
 
-exports.updateProduct = async (req, res) => {
+exports.putProduct = async (req, res) => {
     const product = req.body.product;
-    const image = req.body.image;
-    let createdProduct;
+    let updatedProduct;
+    if (!validation.isProductDataValid(product)) {
+        res.status(406).send({"error": "Data is invalid"});
+        res.end();
+        return;
+    }
     try{
-        createdProduct = await createProduct(product);
-        if (image.image.length > 5) {
-            await createImage(image, productnumber)
-        }
+        updatedProduct = await updateProduct(product);
     } catch(err) {
         res.status(409).send({"error": err});
         console.log(err);
     }
-    res.status(200).send(createdProduct);
+    res.status(200).send(updatedProduct);
     res.end()
 }
 
@@ -124,7 +127,7 @@ updateProduct = async(product) => {
             price: parseFloat(product.price),
             stock: parseInt(product.stock),
             category: product.category
-    }, {where: product.productnumber})
+    }, {where: {productnumber: product.productnumber}})
     } catch(err) {
         return err;
     }
