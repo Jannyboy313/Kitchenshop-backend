@@ -31,6 +31,10 @@ const Products = sequelize.define('product', {
             key: 'name'
         }
     }
+},
+{
+    paranoid: true
 });
+
 
 module.exports = (Products);
