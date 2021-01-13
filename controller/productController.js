@@ -48,7 +48,7 @@ exports.getProducts = async (req, res) => {
 exports.addProduct = async (req, res) => {
     const product = req.body.product;
     let createdProduct;
-    if (!validation.isUserDataValid(product)) {
+    if (!validation.isProductDataValid(product)) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
@@ -66,7 +66,7 @@ exports.addProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     const product = req.body.product;
     let updateProduct;
-    if (!validation.isUserDataValid(product)) {
+    if (!validation.isProductDataValid(product)) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
