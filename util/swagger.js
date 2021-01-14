@@ -640,7 +640,7 @@ module.exports = {
                 }
             }
         },
-        "/products": {
+        "/users": {
             "get": {
                 "tags": [
                     "Users"
