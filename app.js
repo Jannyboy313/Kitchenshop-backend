@@ -9,6 +9,7 @@ const loginRouter = require('./routes/loginRouter.js');
 const productRouter = require('./routes/productRouter.js');
 const orderRouter = require('./routes/orderRouter.js')
 const categoryRouter = require('./routes/categoryRouter.js')
+const userRouter = require('./routes/userRouter.js')
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(loginRouter);
 app.use(productRouter);
 app.use(orderRouter);
 app.use(categoryRouter);
+app.use(userRouter);
 
 //LISTENER
 app.listen(process.env.PORT, () => {

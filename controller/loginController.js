@@ -76,35 +76,26 @@ isDataValid = (body) => {
 
 getAddress_id = async(address) => {
     let reply;
-    try {
-        reply = await Address.findOrCreate({
-            where: {
-                city: address.city,
-                street_address: address.street_address,
-                zipcode: address.zipcode
-            }
-          })
-    } catch(err) {
-        console.log(err);
-        return null;
-    }
+    reply = await Address.findOrCreate({
+        where: {
+            city: address.city,
+            street_address: address.street_address,
+            zipcode: address.zipcode
+        }
+        })
     return reply[0].address_id;
 }
 
 createUser = async(body, address_id) => {
     let reply;
-    try {
-        reply = await Users.create({
-            firstname: body.user.firstname,
-            middlename: body.user.middlename,
-            lastname: body.user.lastname,
-            email: body.user.email,
-            password: body.user.password,
-            address_id: address_id
-        })
-    } catch(err) {
-        return false;
-    }
+    reply = await Users.create({
+        firstname: body.user.firstname,
+        middlename: body.user.middlename,
+        lastname: body.user.lastname,
+        email: body.user.email,
+        password: body.user.password,
+        address_id: address_id
+    })
     return reply;
 }
 

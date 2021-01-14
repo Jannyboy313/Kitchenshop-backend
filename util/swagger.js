@@ -22,6 +22,10 @@ module.exports = {
         {
             "name": "Categories",
             "description": "Requests regarding category finding/altering"
+        },
+        {
+            "name": "Users",
+            "description": "Requests regarding user finding/altering"
         }
     ],
     "paths": {
@@ -636,6 +640,129 @@ module.exports = {
                 }
             }
         },
+        "/products": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Returns all users",
+                "description": "This is used for getting all users.\n Password is not send",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        },
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/updateuser": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Updates a user in the database",
+                "description": "This is used for updating a user in the database",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "type": "object",
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer"
+                                    },
+                                    "firstname": {
+                                        "type": "string"
+                                    },
+                                    "middlename": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "address_id": {
+                                        "type": "integer"
+                                    }
+
+                                },
+                            },
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        },
+                    },
+                    "409": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deleteuser": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deletes a user in the database",
+                "description": "This is used for deleting a user in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "user_id",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
     },
     "definitions": {
         "login": {
@@ -721,6 +848,16 @@ module.exports = {
                     "type": "string"
                 }
             },
+        },
+        "users": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {"$ref": "#/definitions/user"},
+                    {"$ref": "#/definitions/user"},
+                    {"$ref": "#/definitions/user"}
+                ]
+            }
         },
         "order": {
             "type": "object",
