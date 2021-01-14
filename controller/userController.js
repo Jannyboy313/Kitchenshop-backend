@@ -12,7 +12,8 @@ exports.getUsers = async (req, res) => {
                 'middlename',
                 'lastname',
                 'email',
-                'role'
+                'role',
+                "address_id"
             ]
         });
     } catch(err) {
@@ -84,7 +85,8 @@ updateUser = async(user) => {
             middlename: user.middlename,
             lastname: user.lastname,
             email: user.email,
-            role: user.role
+            role: user.role,
+            address_id: user.address_id
     }, {where: {user_id: user.user_id}})
     } catch(err) {
         return err;

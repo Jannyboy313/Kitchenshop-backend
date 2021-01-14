@@ -1,7 +1,7 @@
 const regName = /^[a-z ,.'-]+$/i;
 const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const regRole = /[a-z]{4,5}/
-const regUserid = /[0-9]/
+const regId = /[0-9]/
 
 exports.isUserDataValid = (body) => {
     if (isEmailCorrect(body.email) &&
@@ -13,7 +13,7 @@ exports.isUserDataValid = (body) => {
 }
 
 exports.isRegexNonePersonalValid = (body) => {
-    if (regRole.test(body.role) && regUserid.test(body.user_id)) {
+    if (regRole.test(body.role) && regId.test(body.user_id) && regId.test(body.address_id)) {
         return true;
     }
     return false;
