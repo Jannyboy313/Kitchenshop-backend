@@ -6,15 +6,9 @@ exports.getUsers = async (req, res) => {
     let reply;
     try{
         reply = await Users.findAll({
-            attributes: [
-                'user_id',
-                'firstname',
-                'middlename',
-                'lastname',
-                'email',
-                'role',
-                "address_id"
-            ]
+            attributes: {
+                exclude: ['password']
+            }
         });
     } catch(err) {
         res.status(404).send(err.message);
@@ -26,7 +20,7 @@ exports.getUsers = async (req, res) => {
         res.end();
         return;
     }
-    res.status(200).send(reply[0]);
+    res.status(200).send(format.formatUsersResponse(reply));
     res.end();
 }
 

@@ -26,7 +26,7 @@ capitalizeFirstLetter = (word) => {
 exports.formatUsersResponse = (reply) => {
     let users = [];
     for (let i =0; i < reply.length; i++) {
-        users.push(reply[i].user.dataValues)
+        users.push(reply[i])
     }
     return users;
 }
