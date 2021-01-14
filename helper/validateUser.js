@@ -3,17 +3,17 @@ const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@
 const regRole = /[a-z]{4,5}/
 const regId = /[0-9]/
 
-exports.isUserDataValid = (body) => {
-    if (isEmailCorrect(body.email) &&
-        isNameCorrect(body.firstname, body.lastname) &&
-        isMiddelnameCorrect(body.middlename)) {
+exports.isUserDataValid = (user) => {
+    if (isEmailCorrect(user.email) &&
+        isNameCorrect(user.firstname, user.lastname) &&
+        isMiddelnameCorrect(user.middlename)) {
         return true;
     }
     return false;
 }
 
-exports.isRegexNonePersonalValid = (body) => {
-    if (regRole.test(body.role) && regId.test(body.user_id) && regId.test(body.address_id)) {
+exports.isRegexNonePersonalValid = (user) => {
+    if (regRole.test(user.role) && regId.test(user.user_id) && regId.test(user.address_id)) {
         return true;
     }
     return false;
@@ -29,12 +29,9 @@ isNameCorrect = (firstname, lastname) => {
 }
 
 isMiddelnameCorrect = (middlename) => {
-    console.log("inside middlename check")
     if(regName.test(middlename) || middlename === '') {
-        console.log('Returning true')
         return true;
     }else{
-        console.log('Returning false')
         return false;
     }
 }
