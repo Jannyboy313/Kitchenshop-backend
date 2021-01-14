@@ -820,7 +820,7 @@ module.exports = {
                 ]
             }
         },
-        "User": {
+        "user": {
             "type": "object",
             "properties": {
                 "role": {
