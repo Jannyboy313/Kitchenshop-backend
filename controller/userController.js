@@ -5,7 +5,16 @@ const format = require('../helper/format.js');
 exports.getUsers = async (req, res) => {
     let reply;
     try{
-        reply = await Users.findAll();
+        reply = await Users.findAll({
+            attributes: [
+                'user_id',
+                'firstname',
+                'middlename',
+                'lastname',
+                'email',
+                'role'
+            ]
+        });
     } catch(err) {
         res.status(404).send(err.message);
         res.end();
