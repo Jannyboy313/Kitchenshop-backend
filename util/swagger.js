@@ -732,37 +732,37 @@ module.exports = {
                 }
             }
         },
-    },
-    "/deleteuser": {
-        "delete": {
-            "tags": [
-                "Users"
-            ],
-            "summary": "Deletes a user in the database",
-            "description": "This is used for deleting a user in the database",
-            "parameters": [
-                {
-                    "in": "query",
-                    "name": "user_id",
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "OK",
-                },
-                "404": {
-                    "description": "ERROR",
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "error": {
-                                "type": "string"
+        "/deleteuser": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deletes a user in the database",
+                "description": "This is used for deleting a user in the database",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "user_id",
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string"
+                                }
                             }
                         }
                     }
                 }
             }
-        }
+        },
     },
     "definitions": {
         "login": {
