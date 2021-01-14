@@ -22,3 +22,11 @@ formatAddressData = (body) => {
 capitalizeFirstLetter = (word) => {
     return word.toLowerCase().charAt(0).toUpperCase() + word.slice(1)
 }
+
+exports.formatUsersResponse = (reply) => {
+    let users = [];
+    for (let i =0; i < reply.length; i++) {
+        users.push(reply[i].user.dataValues)
+    }
+    return users;
+}
