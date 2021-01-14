@@ -22,7 +22,7 @@ exports.getUsers = async (req, res) => {
 
 exports.putUser = async (req, res) => {
     const body = req.body;
-    let updatedProduct;
+    let updatedUser;
     if (!isDataValid(body)) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
@@ -32,12 +32,12 @@ exports.putUser = async (req, res) => {
     body = format.formatRegisterData(body);
 
     try{
-        updatedProduct = await updateProduct(product);
+        updatedUser = await updateUser(body);
     } catch(err) {
         res.status(409).send({"error": err});
         console.log(err);
     }
-    res.status(200).send(updatedProduct);
+    res.status(200).send(updatedUser);
     res.end()
 }
 
@@ -64,4 +64,20 @@ isDataValid = (body) => {
         return false;
     }
     return true;
+}
+
+updateUser = async(user) => {
+    let reply;
+    try {
+        reply = await Users.update({
+            firstname: user.firstname,
+            middlename: user.middlename,
+            lastname: user.lastname,
+            email: user.email,
+            role: user.role
+    }, {where: {user_id: user.user_id}})
+    } catch(err) {
+        return err;
+    }
+    return reply;
 }
