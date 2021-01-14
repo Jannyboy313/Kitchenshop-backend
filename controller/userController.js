@@ -25,18 +25,17 @@ exports.getUsers = async (req, res) => {
 }
 
 exports.putUser = async (req, res) => {
-    const body = req.body;
+    let user = req.body;
     let updatedUser;
-    if (!isDataValid(body)) {
+    let isValid = await isDataValid(user);
+    if (!isValid) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
     }
-
-    body = format.formatRegisterData(body);
-
+    user = format.formatUpdateUser(user);
     try{
-        updatedUser = await updateUser(body);
+        updatedUser = await updateUser(user);
     } catch(err) {
         res.status(409).send({"error": err});
         console.log(err);
@@ -62,9 +61,9 @@ exports.deleteUser = async (req, res) => {
     res.end()
 }
 
-isDataValid = (body) => {
-    const isUserValid = validateUser.isUserDataValid(body);
-    const isNonPersonalValid = validateUser.isRegexNonePersonalValid(body);
+isDataValid = async(user) => {
+    const isUserValid = validateUser.isUserDataValid(user);
+    const isNonPersonalValid = validateUser.isRegexNonePersonalValid(user);
     if (!isUserValid || !isNonPersonalValid) {
         return false;
     }
