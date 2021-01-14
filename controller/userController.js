@@ -37,6 +37,7 @@ exports.putUser = async (req, res) => {
         res.status(409).send({"error": err});
         console.log(err);
     }
+    updatedUser.password = null
     res.status(200).send(updatedUser);
     res.end()
 }
