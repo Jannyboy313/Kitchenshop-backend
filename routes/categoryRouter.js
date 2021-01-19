@@ -1,10 +1,11 @@
 const CategoryController = require("../controller/categoryController.js");
 const express = require('express');
+const isAuth = require('../middelware/isAuth.js');
 
 const router = express.Router();
 
 router.get("/categories", CategoryController.getCategories);
-router.post("/addcategory", CategoryController.addCategory);
-router.delete("/deletecategory", CategoryController.deleteCategory);
+router.post("/addcategory", isAuth.admin, CategoryController.addCategory);
+router.delete("/deletecategory", isAuth.admin, CategoryController.deleteCategory);
 
 module.exports = router;
