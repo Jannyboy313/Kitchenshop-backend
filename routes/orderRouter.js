@@ -4,10 +4,10 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get("/customerorders", isAuth.user, orderController.getCustomerOrders);
-router.get("/adminorders", isAuth.admin, orderController.getAdminOrders);
-router.post("/addorders", isAuth.user, orderController.addOrders);
-router.delete("/deleteorder", isAuth.admin, orderController.deleteOrder);
+router.get("/customerorders", isAuth.checkToken, isAuth.user, orderController.getCustomerOrders);
+router.get("/adminorders", isAuth.checkToken, isAuth.admin, orderController.getAdminOrders);
+router.post("/addorders", isAuth.checkToken, isAuth.user, orderController.addOrders);
+router.delete("/deleteorder", isAuth.checkToken, isAuth.admin, orderController.deleteOrder);
 
 
 module.exports = router;

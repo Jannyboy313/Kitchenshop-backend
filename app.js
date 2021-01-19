@@ -9,7 +9,7 @@ const loginRouter = require('./routes/loginRouter.js');
 const productRouter = require('./routes/productRouter.js');
 const orderRouter = require('./routes/orderRouter.js')
 const categoryRouter = require('./routes/categoryRouter.js')
-const userRouter = require('./routes/userRouter.js')
+const userRouter = require('./routes/userRouter.js');
 
 const app = express();
 
