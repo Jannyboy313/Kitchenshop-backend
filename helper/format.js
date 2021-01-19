@@ -4,6 +4,12 @@ exports.formatRegisterData = (body) => {
     return body;
 }
 
+exports.formatUpdateUser = (user) => {
+    user = formatNameData({"user": user}).user;
+    user.role.toLowerCase();
+    return user;
+}
+
 formatNameData = (body) => {
     body.user.firstname = capitalizeFirstLetter(body.user.firstname).trim();
     body.user.middlename = body.user.middlename.toLowerCase().trim();

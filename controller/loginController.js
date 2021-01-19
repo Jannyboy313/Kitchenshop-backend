@@ -6,6 +6,7 @@ const Address = require('../model/addresses.js');
 const validateUser = require('../helper/validateUser.js');
 const validateAddress = require('../helper/validateAddress.js')
 const format = require('../helper/format.js');
+const { belongsTo } = require('../model/addresses.js');
 
 exports.postLogin = async (req, res) => {
     let reply;
@@ -41,8 +42,8 @@ exports.postRegister = async(req, res) => {
     let body = req.body;
     body.user.password = await bcrypt.hash(body.user.password, 12);
     let createdUser;
-
-    if (!isDataValid(body)) {
+    let isValid = await isDataValid(body);
+    if (!isValid) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
         return;
@@ -65,7 +66,7 @@ exports.postRegister = async(req, res) => {
     res.end()
 }
 
-isDataValid = (body) => {
+isDataValid = async(body) => {
     const isUserValid = validateUser.isUserDataValid(body.user);
     const isAddressValid = validateAddress.isAddressValid(body.address);
     if (!isUserValid || !isAddressValid) {

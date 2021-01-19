@@ -2,7 +2,7 @@ const regName = /[a-zA-Z\s]*/;
 const regPrice = /^(\d{1,6})(\.\d{2})?$/;
 const regStock = /[0-9]{0,4}/;
 
-exports.isProductDataValid = (product) => {
+exports.isProductDataValid = async (product) => {
     if (regName.test(product.name) &&
         product.name.length <= 50 &&
         product.description.length <= 1000 &&
