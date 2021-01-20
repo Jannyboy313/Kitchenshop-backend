@@ -7,11 +7,10 @@ exports.user = async (req, res, next) => {
             console.log('ERROR: Could not connect to the protected route');
             res.sendStatus(403);
         } else {
-            req.user_id = authorizedData.users.user_id
+            req.user_id = authorizedData.user.user_id
             next();
         }
     })
-    next();
 }
 
 exports.admin = (req, res, next) => {
@@ -20,14 +19,13 @@ exports.admin = (req, res, next) => {
             console.log('ERROR: Could not connect to the protected route');
             res.sendStatus(403);
         } else {
-            if (authorizedData.users.role === 'admin') {
+            if (authorizedData.user.role === 'admin') {
                 next();
             } else {
                 res.sendStatus(403);
             }
         }
     })
-    next();
 }
 
 exports.checkToken = (req, res, next) => {
