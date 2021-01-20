@@ -20,6 +20,7 @@ exports.admin = (req, res, next) => {
             res.sendStatus(403);
         } else {
             if (authorizedData.user.role === 'admin') {
+                req.user_id = authorizedData.user.user_id
                 next();
             } else {
                 res.sendStatus(403);
