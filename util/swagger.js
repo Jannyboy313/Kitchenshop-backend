@@ -387,12 +387,6 @@ module.exports = {
                 ],
                 "summary": "Returns all orders from the specific customer",
                 "description": "This is used for collecting data from single product",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "productnumber",
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",
