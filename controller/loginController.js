@@ -6,7 +6,6 @@ const Address = require('../model/addresses.js');
 const validateUser = require('../helper/validateUser.js');
 const validateAddress = require('../helper/validateAddress.js')
 const format = require('../helper/format.js');
-const { belongsTo } = require('../model/addresses.js');
 
 exports.postLogin = async (req, res) => {
     let reply;

@@ -23,21 +23,19 @@ isNameCorrect = (firstname, lastname) => {
     if(regName.test(firstname)&&
         regName.test(lastname)){
         return true;
-    }else{
-        return false;
     }
+    return false;
 }
 
 isMiddelnameCorrect = (middlename) => {
     if(regName.test(middlename) || middlename === '') {
         return true;
-    }else{
-        return false;
     }
+    return false;
 }
 
 isEmailCorrect = (email) => {
-    if (regEmail.test(email.toLowerCase())) {
+    if (regEmail.test(email)) {
         return true;
     }
     return false;
