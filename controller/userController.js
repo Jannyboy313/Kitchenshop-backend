@@ -27,7 +27,7 @@ exports.getUsers = async (req, res) => {
 exports.putUser = async (req, res) => {
     let user = req.body;
     let updatedUser;
-    let isValid = await isDataValid(user);
+    let isValid = await isDataValid2(user);
     if (!isValid) {
         res.status(406).send({"error": "Data is invalid"});
         res.end();
@@ -61,7 +61,7 @@ exports.deleteUser = async (req, res) => {
     res.end()
 }
 
-isDataValid = async(user) => {
+isDataValid2 = async(user) => {
     const isUserValid = validateUser.isUserDataValid(user);
     const isNonPersonalValid = validateUser.isRegexNonePersonalValid(user);
     if (!isUserValid || !isNonPersonalValid) {
